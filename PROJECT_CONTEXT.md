@@ -1,0 +1,1 @@
+<WritingBlock id="58314" variant="document"># Lamp — Project Context
