@@ -1,6 +1,50 @@
+import { useState } from 'react'
 import './App.css'
+const menuItems = [
+  {
+    id: 1,
+    name: 'Chicken Dum Biryani',
+    category: 'Indian',
+    description: 'Fragrant basmati rice layered with slow-cooked spices.',
+    price: 249,
+  },
+  {
+    id: 2,
+    name: 'Mutton Dum Biryani',
+    category: 'Indian',
+    description: 'Tender mutton, aromatic rice, and rich traditional spices.',
+    price: 349,
+  },
+  {
+    id: 3,
+    name: 'Chicken Mandi',
+    category: 'Arabian',
+    description: 'Smoky roasted chicken served with fragrant mandi rice.',
+    price: 299,
+  },
+  {
+    id: 4,
+    name: 'Chicken Grill',
+    category: 'Arabian',
+    description: 'Grilled chicken seasoned with bold Arabian spices.',
+    price: 279,
+  },
+  {
+    id: 5,
+    name: 'Mint Lime',
+    category: 'Drinks',
+    description: 'A refreshing lime drink with a hint of mint.',
+    price: 79,
+  },
+]
+function App() {const [selectedCategory, setSelectedCategory] = useState('All')
 
-function App() {
+const filteredItems =
+  selectedCategory === 'All'
+    ? menuItems
+    : menuItems.filter(
+        (item) => item.category === selectedCategory
+      )
   return (
     <main>
       <nav className="navbar">
@@ -64,25 +108,33 @@ function App() {
           bring people together. There's always room for one more.
         </p>
 
-        <div className="menu-grid">
-          <article className="menu-card">
-            <span className="menu-number">01</span>
-            <h3>Signature Biryanis</h3>
-            <p>Fragrant rice, slow-cooked spices, unforgettable flavour.</p>
-          </article>
+        <div className="menu-filters">
+  {['All', 'Indian', 'Arabian', 'Drinks'].map((category) => (
+    <button
+      key={category}
+      type="button"
+      className={
+        selectedCategory === category
+          ? 'menu-filter active'
+          : 'menu-filter'
+      }
+      onClick={() => setSelectedCategory(category)}
+    >
+      {category}
+    </button>
+  ))}
+</div>
 
-          <article className="menu-card">
-            <span className="menu-number">02</span>
-            <h3>Arabian Grills</h3>
-            <p>Smoky, savoury favourites made for sharing.</p>
-          </article>
-
-          <article className="menu-card">
-            <span className="menu-number">03</span>
-            <h3>From the Kitchen</h3>
-            <p>Indian comfort food with a little Arabian inspiration.</p>
-          </article>
-        </div>
+<div className="menu-grid">
+  {filteredItems.map((item) => (
+    <article className="menu-card" key={item.id}>
+      <span className="menu-number">{item.category}</span>
+      <h3>{item.name}</h3>
+      <p>{item.description}</p>
+      <p className="menu-price">₹{item.price}</p>
+    </article>
+  ))}
+</div>
       </section>
 
       <section className="story-section" id="story">
