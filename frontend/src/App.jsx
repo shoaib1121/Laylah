@@ -59,8 +59,8 @@ const filteredItems =
         <a className="nav-cta" href="#menu">Explore Menu</a>
       </nav>
 
-      <section className="hero-section" id="home">
-        <div className="hero-content">
+      <section className="intro-section" id="home">
+        <div className="intro-content">
           <p className="eyebrow">INDIAN SOUL. ARABIAN SPIRIT.</p>
 
           <h1>
@@ -69,12 +69,12 @@ const filteredItems =
             brought together.
           </h1>
 
-          <p className="hero-description">
+          <p className="intro-description">
             From fragrant biryanis to smoky grills, discover
             a table where Indian tradition meets Arabian warmth.
           </p>
 
-          <div className="hero-actions">
+          <div className="intro-actions">
             <a className="button button-primary" href="#menu">
               Discover our menu
             </a>
@@ -83,12 +83,15 @@ const filteredItems =
             </a>
           </div>
 
-          <p className="hero-note">MADE WITH CARE. SERVED WITH HEART.</p>
+          <p className="intro-note">MADE WITH CARE. SERVED WITH HEART.</p>
         </div>
 
-        <div className="hero-visual" role="img" aria-label="Restaurant food presentation">
-          <div className="image-placeholder">
-            <span>AN EXPERIENCE WORTH SITTING DOWN FOR</span>
+        <div className="intro-visual" role="img" aria-label="Temporary illustration of a Lamp dish">
+          <div className="intro-placeholder" aria-hidden="true">
+            <div className="intro-plate">
+              <div className="intro-food" />
+            </div>
+            <span>TEMPORARY FOOD VISUAL · PHOTO TO COME</span>
           </div>
           <div className="visual-caption">
             <span>THE LAMP TABLE</span>
@@ -113,6 +116,7 @@ const filteredItems =
     <button
       key={category}
       type="button"
+      aria-pressed={selectedCategory === category}
       className={
         selectedCategory === category
           ? 'menu-filter active'
@@ -124,6 +128,10 @@ const filteredItems =
     </button>
   ))}
 </div>
+
+<p className="menu-result-count" aria-live="polite">
+  Showing {filteredItems.length} dishes
+</p>
 
 <div className="menu-grid">
   {filteredItems.map((item) => (
