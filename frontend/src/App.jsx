@@ -1,50 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-const menuItems = [
-  {
-    id: 1,
-    name: 'Chicken Dum Biryani',
-    category: 'Indian',
-    description: 'Fragrant basmati rice layered with slow-cooked spices.',
-    price: 249,
-  },
-  {
-    id: 2,
-    name: 'Mutton Dum Biryani',
-    category: 'Indian',
-    description: 'Tender mutton, aromatic rice, and rich traditional spices.',
-    price: 349,
-  },
-  {
-    id: 3,
-    name: 'Chicken Mandi',
-    category: 'Arabian',
-    description: 'Smoky roasted chicken served with fragrant mandi rice.',
-    price: 299,
-  },
-  {
-    id: 4,
-    name: 'Chicken Grill',
-    category: 'Arabian',
-    description: 'Grilled chicken seasoned with bold Arabian spices.',
-    price: 279,
-  },
-  {
-    id: 5,
-    name: 'Mint Lime',
-    category: 'Drinks',
-    description: 'A refreshing lime drink with a hint of mint.',
-    price: 79,
-  },
-]
-function App() {const [selectedCategory, setSelectedCategory] = useState('All')
 
-const filteredItems =
-  selectedCategory === 'All'
-    ? menuItems
-    : menuItems.filter(
-        (item) => item.category === selectedCategory
-      )
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [menuItems, setMenuItems] = useState([])
+  const [menuStatus, setMenuStatus] = useState('loading')
+
+  useEffect(() => {
+    fetch('/api/v1/menu')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Menu request failed')
+        }
+
+        return response.json()
+      })
+      .then((data) => {
+        setMenuItems(data.items)
+        setMenuStatus('success')
+      })
+      .catch(() => {
+        setMenuStatus('error')
+      })
+  }, [])
+
+  const filteredItems =
+    selectedCategory === 'All'
+      ? menuItems
+      : menuItems.filter((item) => item.category === selectedCategory)
+
   return (
     <main>
       <nav className="navbar">
@@ -129,20 +113,32 @@ const filteredItems =
   ))}
 </div>
 
-<p className="menu-result-count" aria-live="polite">
-  Showing {filteredItems.length} dishes
-</p>
+        {menuStatus === 'loading' && <p>Loading menu…</p>}
 
-<div className="menu-grid">
-  {filteredItems.map((item) => (
-    <article className="menu-card" key={item.id}>
-      <span className="menu-number">{item.category}</span>
-      <h3>{item.name}</h3>
-      <p>{item.description}</p>
-      <p className="menu-price">₹{item.price}</p>
-    </article>
-  ))}
-</div>
+        {menuStatus === 'error' && (
+          <p role="alert">
+            The menu could not be loaded. Please try again later.
+          </p>
+        )}
+
+        {menuStatus === 'success' && (
+          <>
+            <p className="menu-result-count" aria-live="polite">
+              Showing {filteredItems.length} dishes
+            </p>
+
+            <div className="menu-grid">
+              {filteredItems.map((item) => (
+                <article className="menu-card" key={item.id}>
+                  <span className="menu-number">{item.category}</span>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                  <p className="menu-price">₹{item.price}</p>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       <section className="story-section" id="story">
