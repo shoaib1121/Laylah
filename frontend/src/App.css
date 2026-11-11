@@ -26,7 +26,7 @@ main {
 }
 
 .brand span {
-  color: var(--olive);
+  color: var(--forest);
 }
 
 .nav-links {
@@ -46,19 +46,19 @@ main {
 }
 
 .nav-links a:hover {
-  color: var(--olive);
+  color: var(--forest);
 }
 
 .nav-cta {
   padding: 13px 19px;
-  color: white;
-  background: var(--olive);
+  color: var(--cream);
+  background: var(--forest);
   transition: background 180ms ease;
 }
 
 .nav-cta:hover,
 .button-primary:hover {
-  background: var(--olive-dark);
+  background: var(--forest-dark);
 }
 
 .intro-section {
@@ -75,7 +75,7 @@ main {
 
 .eyebrow {
   margin-bottom: 22px;
-  color: var(--olive);
+  color: var(--forest);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2.2px;
@@ -91,7 +91,7 @@ main {
 }
 
 .intro-content h1 span {
-  color: var(--olive);
+  color: var(--forest);
   font-style: italic;
 }
 
@@ -122,8 +122,8 @@ main {
 }
 
 .button-primary {
-  color: white;
-  background: var(--olive);
+  color: var(--cream);
+  background: var(--forest);
 }
 
 .text-link {
@@ -132,13 +132,13 @@ main {
 }
 
 .text-link:hover {
-  color: var(--olive);
+  color: var(--forest);
 }
 
 .intro-note {
   margin-top: 52px;
   margin-bottom: 0;
-  color: #88887b;
+  color: var(--muted);
   font-size: 9px;
   letter-spacing: 1.5px;
 }
@@ -156,8 +156,8 @@ main {
   justify-content: center;
   padding: 25px;
   background:
-    radial-gradient(ellipse at 50% 40%, #a5a17c 0%, transparent 40%),
-    linear-gradient(145deg, #d7c9a9, #b3a17c 52%, #74785b);
+    radial-gradient(ellipse at 50% 40%, var(--soft-green) 0%, transparent 40%),
+    linear-gradient(145deg, #b9cba7, #79947a 52%, var(--forest));
 }
 
 .intro-plate {
@@ -169,7 +169,7 @@ main {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: radial-gradient(circle, #d6c8ad 0 62%, #fffaf0 63% 69%, #e7dfcd 70% 76%, #f7f3e9 77%);
-  box-shadow: 0 20px 35px rgb(41 44 34 / 24%);
+  box-shadow: 0 20px 35px rgb(32 45 37 / 24%);
 }
 
 .intro-food {
@@ -192,8 +192,8 @@ main {
 .intro-placeholder span {
   position: relative;
   padding: 10px 13px;
-  color: white;
-  background: rgb(41 44 34 / 70%);
+  color: var(--cream);
+  background: var(--forest);
   font-size: 9px;
   letter-spacing: 1.6px;
   text-align: center;
@@ -257,17 +257,18 @@ main {
 .menu-card {
   min-height: 190px;
   padding: 26px;
+  background-color: #f2f4e8;
   border: 1px solid var(--line);
   transition: border-color 180ms ease, transform 180ms ease;
 }
 
 .menu-card:hover {
-  border-color: var(--olive);
+  border-color: var(--forest);
   transform: translateY(-3px);
 }
 
 .menu-number {
-  color: var(--olive);
+  color: var(--forest);
   font-size: 10px;
   letter-spacing: 1px;
 }
@@ -290,12 +291,12 @@ main {
 .story-section {
   padding: 85px 7%;
   color: var(--cream);
-  background: var(--olive);
+  background: var(--forest);
   text-align: center;
 }
 
 .story-section .eyebrow {
-  color: #e0e2d2;
+  color: var(--soft-green);
 }
 
 .story-section h2 {
@@ -305,7 +306,7 @@ main {
 .story-section > p:not(.eyebrow) {
   max-width: 460px;
   margin: 0 auto 26px;
-  color: #e3e4d9;
+  color: var(--cream);
   font-size: 13px;
   line-height: 1.9;
 }
@@ -316,7 +317,7 @@ main {
 }
 
 .button-light:hover {
-  background: white;
+  background: var(--soft-green);
 }
 
 .footer {
@@ -432,24 +433,24 @@ main {
 
 .menu-filter {
   padding: 0.7rem 1.25rem;
-  border: 1px solid #d8d5c8;
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: transparent;
-  color: #34372c;
+  color: var(--charcoal);
   font: inherit;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .menu-filter:hover {
-  border-color: #596344;
-  color: #596344;
+  border-color: var(--forest);
+  color: var(--forest);
 }
 
 .menu-filter.active {
-  background: #596344;
-  border-color: #596344;
-  color: #fffdf6;
+  background: var(--soft-green);
+  border-color: var(--forest);
+  color: var(--forest);
 }
 
 /* Dish cards */
@@ -470,5 +471,5 @@ main {
   margin-top: auto;
   padding-top: 1rem;
   font-weight: 700;
-  color: #596344;
+  color: var(--forest);
 }

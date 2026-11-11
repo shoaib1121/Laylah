@@ -32,7 +32,7 @@ function App() {
   return (
     <main>
       <nav className="navbar">
-        <a className="brand" href="#home">LAMP<span>.</span></a>
+        <a className="brand" href="#home">LAYLAH<span>.</span></a>
 
         <div className="nav-links">
           <a href="#home">Home</a>
@@ -70,7 +70,7 @@ function App() {
           <p className="intro-note">MADE WITH CARE. SERVED WITH HEART.</p>
         </div>
 
-        <div className="intro-visual" role="img" aria-label="Temporary illustration of a Lamp dish">
+        <div className="intro-visual" role="img" aria-label="Temporary illustration of a Laylah dish">
           <div className="intro-placeholder" aria-hidden="true">
             <div className="intro-plate">
               <div className="intro-food" />
@@ -78,7 +78,7 @@ function App() {
             <span>TEMPORARY FOOD VISUAL · PHOTO TO COME</span>
           </div>
           <div className="visual-caption">
-            <span>THE LAMP TABLE</span>
+            <span>THE LAYLAH TABLE</span>
             <span>GOOD FOOD, GOOD COMPANY</span>
           </div>
         </div>
@@ -86,7 +86,7 @@ function App() {
 
       <section className="menu-section" id="menu">
         <div>
-          <p className="eyebrow">A TASTE OF LAMP</p>
+          <p className="eyebrow">A TASTE OF LAYLAH</p>
           <h2>Made for the<br />moments that matter.</h2>
         </div>
 
@@ -145,16 +145,16 @@ function App() {
         <p className="eyebrow">MORE THAN A MEAL</p>
         <h2>A little warmth.<br />A lot of flavour.</h2>
         <p>
-          Lamp is built around a simple idea: great food tastes even
+          Laylah is built around a simple idea: great food tastes even
           better when it brings people closer. Come hungry, leave happy.
         </p>
         <a className="button button-light" href="#home">Back to the top ↑</a>
       </section>
 
       <footer className="footer">
-        <a className="brand" href="#home">LAMP<span>.</span></a>
+        <a className="brand" href="#home">LAYLAH<span>.</span></a>
         <p>Good food brings us together.</p>
-        <span>© 2026 Lamp. A concept in the making.</span>
+        <span>© 2026 Laylah. A concept in the making.</span>
       </footer>
     </main>
   )
