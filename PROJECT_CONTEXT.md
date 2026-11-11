@@ -14,7 +14,7 @@ The owner wants to understand every important line of code and technical decisio
 - Local PostgreSQL 18.6 runs on port 5433. The database is `laylah_dev`, role `laylah_app`, schema `app`, and table `app.menu_items`, with five menu records. The role has CONNECT, schema USAGE, and table SELECT.
 - `backend/.env.example` and ignored `backend/.env` use the Laylah database and role identifiers. The database and role rename is complete. The SQL setup has not been captured as a tracked migration.
 - No authentication, authorization, CI/CD, AppSec scan configuration, or deployment is implemented.
-- The project folder is now `C:\Users\Admin\OneDrive\Laylah`. Branch `master` is at `561e55d`; working changes and new documentation remain uncommitted. There is no Git remote or GitHub repository yet. No Codex Cloud environment is configured; the ChatGPT project named Laylah exists, but the local Codex project entry still points to the old folder path.
+- The project folder is now `C:\Users\Admin\OneDrive\Laylah`. The full project is committed and pushed to the public GitHub repository `shoaib1121/Laylah` on `main` at `48de0dd`; local `master` tracks `origin/main`. The local password file `backend/.env` is ignored and was not uploaded. No Codex Cloud environment is configured; the ChatGPT project named Laylah exists, but the local Codex project entry still points to the old folder path.
 - The local API and Vite development server are currently stopped after the folder move. Start them from the new Laylah path to resume the app.
 
 ## Document map
@@ -35,7 +35,7 @@ The owner wants to understand every important line of code and technical decisio
 
 ## Immediate continuation point
 
-The current setup task is to create a private GitHub repository for the complete Laylah project and prepare a reusable Codex Cloud environment from it. Keep ignored `backend/.env` out of Git. The next application milestone is a tracked SQL migration for the existing schema and sample data; tell the owner before starting that migration.
+The current setup task is to prepare a reusable Codex Cloud environment from the GitHub repository `shoaib1121/Laylah`. Keep ignored `backend/.env` out of Git. The next application milestone is a tracked SQL migration for the existing schema and sample data; tell the owner before starting that migration.
 
 The `psql` executable is not on `PATH`; the user verified it at:
 

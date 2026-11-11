@@ -12,7 +12,7 @@ The tracked database migration is still outstanding. Authentication, authorizati
 
 ## Current status — 2026-11-11
 
-The local app and API were verified after the rebrand. Their dev servers are currently stopped following the project folder move; start them using the instructions below. The local Git repository has no remote yet, and no Codex Cloud environment is configured.
+The local app and API were verified after the rebrand. Their dev servers are currently stopped following the project folder move; start them using the instructions below. The project is published in the public GitHub repository [shoaib1121/Laylah](https://github.com/shoaib1121/Laylah) on `main` (initial project commit `48de0dd`). No Codex Cloud environment is configured yet.
 
 ## Documentation
 
