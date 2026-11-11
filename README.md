@@ -10,9 +10,11 @@ Laylah is a restaurant web application for an Indian and Arabian food concept, a
 
 The tracked database migration is still outstanding. Authentication, authorization, ordering, CI/CD, security scanning, and deployment are planned.
 
-## Current status — 2026-11-11
+## Current status — 2026-11-12
 
-The local app and API were verified after the rebrand. Their dev servers are currently stopped following the project folder move; start them using the instructions below. The project is published in the public GitHub repository [shoaib1121/Laylah](https://github.com/shoaib1121/Laylah) on `main` (initial project commit `48de0dd`). No Codex Cloud environment is configured yet.
+The project is published in the public GitHub repository [shoaib1121/Laylah](https://github.com/shoaib1121/Laylah), whose default branch is `main`. A reusable Codex Cloud environment has been published. The Cloud workspace was confirmed at `/workspace/Laylah` with this repository as its remote, on branch `work` at commit `4eeee4e`.
+
+The Cloud setup session reported that it installed dependencies, started PostgreSQL, the API, and the frontend, and passed all five API tests, frontend lint/build, and live menu/category-filter checks. Those are results reported by that setup session, not a CI run or a guarantee that its processes are still running. The database was a development fixture; a tracked migration and production deployment remain outstanding. Local Windows server status was not checked during this closeout.
 
 ## Documentation
 
@@ -20,6 +22,7 @@ The local app and API were verified after the rebrand. Their dev servers are cur
 - [Architecture and design](ARCHITECTURE.md)
 - [Security requirements and learning lifecycle](SECURITY.md)
 - [Development history and next steps](DEVELOPMENT_LOG.md)
+- [Application roadmap](docs/roadmap/Laylah_Project_Roadmap.svg)
 - [Menu API requirements and threat model](docs/security/menu-api-requirements-threat-model.md)
 
 ## Development environment

@@ -4,17 +4,18 @@ This file is a concise project handoff and milestone record, not a replacement f
 
 ## Git history
 
-Latest recorded commits on the project history (`master` locally, tracking `origin/main`):
+Selected project commits through the Cloud handoff checkpoint on `main` (before the 2026-11-12 status-doc update):
 
 | Commit | Summary |
 |---|---|
+| `4eeee4e` | Update Laylah Cloud handoff status; latest commit used by the verified Cloud checkout |
 | `48de0dd` | Prepare Laylah project for cloud development; initial push to GitHub `main` |
 | `561e55d` | Add local menu API and frontend integration |
 | `fb5284d` | Update Laylah UI, dev config, and context |
 | `53ffe31` | Add interactive menu category filters |
 | `3f39326` | Initial Laylah restaurant homepage |
 
-The complete project was committed as `48de0dd` and pushed to the public repository `shoaib1121/Laylah` on `main`. The local `master` branch tracks `origin/main`. The ignored local `backend/.env` was not uploaded. Recheck `git status` before further changes.
+The complete project was first pushed as `48de0dd` to the public repository `shoaib1121/Laylah`; its default branch is `main`. The ignored local `backend/.env` was not uploaded. The Cloud checkout described below was verified separately on branch `work` at `4eeee4e`. This status refresh and roadmap are committed in the current main-branch history; check GitHub for the exact current head.
 
 ## Milestones
 
@@ -65,8 +66,17 @@ At closeout on 2026-11-11:
 - The local PostgreSQL database and app role were renamed to `laylah_dev` and `laylah_app`; the ignored local environment file uses those names and remains excluded by Git.
 - The API restarted successfully after the rename. Health and menu endpoints passed direct checks, and the browser showed five menu dishes with Laylah branding.
 - The local project folder was moved to `C:\Users\Admin\OneDrive\Laylah`. The local API and frontend processes are currently stopped after that move and should be started from the new path.
-- The public GitHub repository `shoaib1121/Laylah` is populated on `main` at `48de0dd`. No saved Codex Cloud environment exists yet. A ChatGPT project named Laylah exists, while the registered local Codex project path is stale.
+- At this 2026-11-11 checkpoint, Cloud setup and publication were still pending. The status was superseded on 2026-11-12, as recorded below.
 - No migration was created or run. The next application development task remains capturing the existing schema and seed data in a tracked migration; notify the owner before starting it.
+
+## Cloud development and closeout checkpoint (2026-11-12)
+
+- The reusable Codex Cloud environment was published from the web setup flow.
+- The Cloud workspace verified its repository root as `/workspace/Laylah`, remote `https://github.com/shoaib1121/Laylah.git`, branch `work`, and checked-out commit `4eeee4ec7a443f71f39913e23158dbc9591de1eb`. At the time of that check, GitHub `main` was also at `4eeee4e`.
+- The setup session reported dependencies installed, PostgreSQL/API/frontend running, all five API tests passing, frontend lint and production build passing, and live menu/category-filter checks passing. These were reported for that setup session; they are not CI results or a promise of continuing process uptime.
+- The repository's tracked files remained unchanged during the Cloud setup run. This closeout updates the project handoff notes and adds the roadmap image.
+- The Cloud database was a local development fixture. The manually created schema and seed data still need a reviewed, tracked migration; production deployment does not exist. Cloud development availability does not mean the customer-facing application is deployed.
+- The main branch remains the project source of truth; the Cloud task's `work` branch was the verified checkout. The roadmap is [`docs/roadmap/Laylah_Project_Roadmap.svg`](docs/roadmap/Laylah_Project_Roadmap.svg).
 
 ## Environment notes
 
@@ -78,8 +88,10 @@ At closeout on 2026-11-11:
 
 ## Recommended next application work
 
-1. Finish cloud setup by creating and publishing a reusable Codex Cloud environment for `shoaib1121/Laylah`.
-2. Create a tracked SQL migration to reproduce the schema, constraints, grants, and seed data already applied manually. Do not run it against the populated database until it has an idempotent/reconciliation plan; notify the owner first.
-3. Revisit the open API contract choices and add PostgreSQL integration coverage when the owner wants to resume AppSec testing.
+1. Design and review a tracked SQL migration for the existing schema, constraints, least-privilege grants, and five seed dishes. Do not run it against the populated database until the reconciliation/safety plan has been reviewed with the owner.
+2. Add PostgreSQL integration coverage alongside the existing API test-double checks, then resolve remaining API contract questions.
+3. Decide the restaurant product scope and user journeys before introducing authentication, roles, or ordering workflows.
+4. Add CI and AppSec automation after the core data and API contracts are reproducible.
+5. Choose production hosting and operations only after scope and cost review.
 
 Do not proceed to authentication until the first feature that needs protected access is defined; the agreed cookie-based direction is recorded in `SECURITY.md` and `ARCHITECTURE.md`.

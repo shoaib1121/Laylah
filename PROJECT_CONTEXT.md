@@ -10,11 +10,11 @@ The owner wants to understand every important line of code and technical decisio
 
 - The frontend is React/JSX with Vite and CSS. Its one-page restaurant site fetches menu data from the local API and filters it by category.
 - The backend is a local Express 5 API. After the database and role were renamed, its public, read-only menu endpoint was verified: health returned `ok` and the menu returned five records. The browser displayed all five dishes under Laylah branding.
-- Five backend API tests use Node's built-in test runner and Supertest with a test double for PostgreSQL. The November 10 run was blocked by loopback permissions before it could check API responses. Frontend lint and build passed on November 10, 2026. No tests were rerun after the rebrand.
+- Five backend API tests use Node's built-in test runner and Supertest with a test double for PostgreSQL. An earlier November 10 local test run was blocked by loopback permissions before it could check API responses. The 2026-11-12 Codex Cloud setup session reported all five API tests, frontend lint/build, and live menu/category-filter checks passed; this was reported by that setup session rather than a CI pipeline.
 - Local PostgreSQL 18.6 runs on port 5433. The database is `laylah_dev`, role `laylah_app`, schema `app`, and table `app.menu_items`, with five menu records. The role has CONNECT, schema USAGE, and table SELECT.
 - `backend/.env.example` and ignored `backend/.env` use the Laylah database and role identifiers. The database and role rename is complete. The SQL setup has not been captured as a tracked migration.
 - No authentication, authorization, CI/CD, AppSec scan configuration, or deployment is implemented.
-- The project folder is now `C:\Users\Admin\OneDrive\Laylah`. The full project is committed and pushed to the public GitHub repository `shoaib1121/Laylah` on `main` at `48de0dd`; local `master` tracks `origin/main`. The local password file `backend/.env` is ignored and was not uploaded. No Codex Cloud environment is configured; the ChatGPT project named Laylah exists, but the local Codex project entry still points to the old folder path.
+- The project folder is `C:\Users\Admin\OneDrive\Laylah`. The public GitHub repository is `shoaib1121/Laylah`, with `main` as its default branch; the ignored local password file `backend/.env` is not in the repository. A reusable Codex Cloud environment was published. Its workspace was confirmed at `/workspace/Laylah`, remote `https://github.com/shoaib1121/Laylah.git`, branch `work`, commit `4eeee4e`. Cloud is a development workspace, not a production deployment.
 - The local API and Vite development server are currently stopped after the folder move. Start them from the new Laylah path to resume the app.
 
 ## Document map
@@ -23,6 +23,7 @@ The owner wants to understand every important line of code and technical decisio
 - [`ARCHITECTURE.md`](ARCHITECTURE.md): verified current architecture and clearly labeled future direction.
 - [`SECURITY.md`](SECURITY.md): current security behavior, AppSec lifecycle, planned controls, and open questions.
 - [`DEVELOPMENT_LOG.md`](DEVELOPMENT_LOG.md): commit history, milestone record, verification notes, and next work.
+- [`docs/roadmap/Laylah_Project_Roadmap.svg`](docs/roadmap/Laylah_Project_Roadmap.svg): current status and proposed major development stages.
 - [`docs/security/menu-api-requirements-threat-model.md`](docs/security/menu-api-requirements-threat-model.md): feature-level requirements and threat-model draft for the public menu API.
 
 ## Working rules
@@ -35,7 +36,7 @@ The owner wants to understand every important line of code and technical decisio
 
 ## Immediate continuation point
 
-The current setup task is to prepare a reusable Codex Cloud environment from the GitHub repository `shoaib1121/Laylah`. Keep ignored `backend/.env` out of Git. The next application milestone is a tracked SQL migration for the existing schema and sample data; tell the owner before starting that migration.
+The GitHub repository and reusable Codex Cloud development environment are set up. Keep ignored `backend/.env` out of Git. The next application milestone is to design and review a tracked SQL migration for the existing schema and sample data; do not run it against the populated local database until its reconciliation/safety plan is reviewed.
 
 The `psql` executable is not on `PATH`; the user verified it at:
 

@@ -14,7 +14,7 @@ Laylah is intended to be a complete, end-to-end AppSec learning and portfolio pr
 - The menu route uses a `$1` SQL parameter for category values; database errors return a generic JSON error. After the database and role rename, the running API returned health `ok` and five menu records.
 - PostgreSQL role `laylah_app` is limited to connecting and reading `app.menu_items`; it has no table write or schema modification grants.
 
-Current limitations include no versioned database migration, no rate limiting, no authentication/authorization, no CI security checks, no GitHub remote, and no deployed environment. The November 10 backend test run hit loopback permission errors before it could verify API responses. A later direct API check verified the renamed database connection and menu response. See the detailed [menu API requirements and threat model](docs/security/menu-api-requirements-threat-model.md).
+Current limitations include no versioned database migration, no rate limiting, no authentication/authorization, no CI security checks, and no deployed production environment. The project has a public GitHub remote and a published Codex Cloud development environment; a Cloud checkout was confirmed on 2026-11-12. That setup session reported the five API tests and frontend lint/build passing, but there is no CI pipeline. The Cloud database was a development fixture. An earlier November 10 local backend test run hit loopback permission errors before it could verify API responses. A later direct API check verified the renamed database connection and menu response. See the detailed [menu API requirements and threat model](docs/security/menu-api-requirements-threat-model.md).
 
 ## Agreed direction and proposals — not implemented
 
