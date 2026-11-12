@@ -88,13 +88,20 @@ At closeout on 2026-11-11:
 
 ## Recommended next application work
 
-1. Design and review a tracked SQL migration for the existing schema, constraints, least-privilege grants, and five seed dishes. Do not run it against the populated database until the reconciliation/safety plan has been reviewed with the owner.
+1. Review and merge the tracked SQL migration for the existing schema, constraints, least-privilege grants, and five seed dishes. It is for fresh databases only and must not be run against the populated `laylah_dev` database; the reconciliation/safety plan still needs review.
 2. Add PostgreSQL integration coverage alongside the existing API test-double checks, then resolve remaining API contract questions.
 3. Decide the restaurant product scope and user journeys before introducing authentication, roles, or ordering workflows.
 4. Add CI and AppSec automation after the core data and API contracts are reproducible.
 5. Choose production hosting and operations only after scope and cost review.
 
 Do not proceed to authentication until the first feature that needs protected access is defined; the agreed cookie-based direction is recorded in `SECURITY.md` and `ARCHITECTURE.md`.
+
+## Migration design review (2026-11-13)
+
+- The owner inspected `app.menu_items`, its category/name/price checks, schema and table privileges, the `laylah_app` role, and the five existing menu records using read-only `psql` commands.
+- Added `backend/migrations/001_create_menu_items.sql`. It creates the schema/table, inserts the five menu items, and grants the app role schema usage and table SELECT on a fresh database.
+- The migration has not been run against `laylah_dev`. A temporary-database validation was initiated from the owner's Windows PowerShell, but the first execution used a relative path from outside the repository and PostgreSQL did not read the SQL file.
+- Pending: document/review the safe path for the already-populated database. Do not execute this fresh-database migration on `laylah_dev`.
 
 ## GitHub-first workflow setup (2026-11-12)
 

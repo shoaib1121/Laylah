@@ -12,7 +12,7 @@ The owner wants to understand every important line of code and technical decisio
 - The backend is a local Express 5 API. After the database and role were renamed, its public, read-only menu endpoint was verified: health returned `ok` and the menu returned five records. The browser displayed all five dishes under Laylah branding.
 - Eight backend API tests now cover the original five cases plus generic database errors, parameterized category queries, and rejection before database access. They use Node's built-in test runner and Supertest with a test double for PostgreSQL. An earlier November 10 local test run was blocked by loopback permissions before it could check API responses. The 2026-11-12 Codex Cloud setup session reported all five API tests, frontend lint/build, and live menu/category-filter checks passed; this was reported by that setup session rather than a CI pipeline.
 - Local PostgreSQL 18.6 runs on port 5433. The database is `laylah_dev`, role `laylah_app`, schema `app`, and table `app.menu_items`, with five menu records. The role has CONNECT, schema USAGE, and table SELECT.
-- `backend/.env.example` and ignored `backend/.env` use the Laylah database and role identifiers. The database and role rename is complete. The SQL setup has not been captured as a tracked migration.
+- `backend/.env.example` and ignored `backend/.env` use the Laylah database and role identifiers. The database and role rename is complete. `backend/migrations/001_create_menu_items.sql` captures the initial schema, seed data, and read-only grants for fresh databases only.
 - GitHub Actions CI is configured for PRs targeting `main` and pushes to `main`: frontend lint/build, backend tests, and lockfile dependency audits. See DEVELOPMENT_LOG.md for observed verification and pending protection settings. Authentication, authorization, production deployment, SAST, and DAST automation remain unimplemented.
 - The project folder is `C:\Users\Admin\OneDrive\Laylah`. The public GitHub repository is `shoaib1121/Laylah`, with `main` as its default branch; the ignored local password file `backend/.env` is not in the repository. A reusable Codex Cloud environment was published. Its workspace was confirmed at `/workspace/Laylah`, remote `https://github.com/shoaib1121/Laylah.git`, branch `work`, commit `4eeee4e`. Cloud is a development workspace, not a production deployment.
 - The local API and Vite development server are currently stopped after the folder move. Start them from the new Laylah path to resume the app.
@@ -36,7 +36,7 @@ The owner wants to understand every important line of code and technical decisio
 
 ## Immediate continuation point
 
-The GitHub repository and reusable Codex Cloud development environment are set up. Keep ignored `backend/.env` out of Git. The next application milestone is to design and review a tracked SQL migration for the existing schema and sample data; do not run it against the populated local database until its reconciliation/safety plan is reviewed.
+The GitHub repository and reusable Codex Cloud development environment are set up. Keep ignored `backend/.env` out of Git. The initial tracked migration is ready for review; do not run it against the populated local database until its reconciliation/safety plan is reviewed.
 
 The `psql` executable is not on `PATH`; the user verified it at:
 

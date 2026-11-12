@@ -1,6 +1,6 @@
 # Public Menu API: Requirements and Threat Model (Draft)
 
-**Status:** This remains a partial requirements/threat-model draft. The owner agreed that unsupported categories and repeated `category` parameters should return `400 Bad Request` (2026-10-26). After the Laylah database and role rename, the API-to-database path was verified locally: health returned `ok` and the menu endpoint returned five records. The manually applied schema has no tracked migration. Local dev servers are currently stopped after the project folder move. Remaining contract and architecture decisions are open. See `backend/app.js` and `backend/database.js`.
+**Status:** This remains a partial requirements/threat-model draft. The owner agreed that unsupported categories and repeated `category` parameters should return `400 Bad Request` (2026-10-26). After the Laylah database and role rename, the API-to-database path was verified locally: health returned `ok` and the menu endpoint returned five records. `backend/migrations/001_create_menu_items.sql` now captures the initial schema and seed data for fresh databases; it must not be run against the populated `laylah_dev` database. Local dev servers are currently stopped after the project folder move. Remaining contract and architecture decisions are open. See `backend/app.js` and `backend/database.js`.
 
 ## 1. Feature goal
 
@@ -123,7 +123,7 @@ Local data flow: browser → Vite development server on port 5173 → `/api` pro
 2. **Resolved:** duplicate `category` parameters return `400 Bad Request`.
 3. Current code ignores unknown query parameters; should this remain the documented API policy?
 4. Should money use integer INR values for this prototype or integer paise for future payment accuracy?
-5. The owner renamed the local PostgreSQL database and role, restarted the API, and verified health plus all five menu rows. A tracked schema migration remains outstanding.
+5. The owner renamed the local PostgreSQL database and role, restarted the API, and verified health plus all five menu rows. The tracked initial migration is for fresh databases; reconcile the existing database before adopting a migration runner.
 6. Local development currently uses separate Vite/Express ports with a Vite proxy. Production topology remains undecided.
 7. Should rate limiting be included in the local API, or deferred until deployment/abuse testing demonstrates the need?
 

@@ -8,13 +8,13 @@ Laylah is a restaurant web application for an Indian and Arabian food concept, a
 - A local Express REST API with health and public menu endpoints. The menu endpoint reads from PostgreSQL, where five sample dishes have been seeded. After the Laylah database and role rename, the health and menu endpoints were verified; the menu returned five dishes.
 - Backend API tests using Node's built-in test runner and Supertest.
 
-The tracked database migration is still outstanding. Authentication, authorization, ordering, and deployment remain planned. GitHub Actions validation and dependency auditing are configured; current results and limitations are in DEVELOPMENT_LOG.md.
+The initial database migration is tracked for fresh databases. Authentication, authorization, ordering, and deployment remain planned. GitHub Actions validation and dependency auditing are configured; current results and limitations are in DEVELOPMENT_LOG.md.
 
 ## Current status — 2026-11-12
 
 The project is published in the public GitHub repository [shoaib1121/Laylah](https://github.com/shoaib1121/Laylah), whose default branch is `main`. A reusable Codex Cloud environment has been published. The Cloud workspace was confirmed at `/workspace/Laylah` with this repository as its remote, on branch `work` at commit `4eeee4e`.
 
-The Cloud setup session reported that it installed dependencies, started PostgreSQL, the API, and the frontend, and passed all five API tests, frontend lint/build, and live menu/category-filter checks. Those are results reported by that setup session, not a CI run or a guarantee that its processes are still running. The database was a development fixture; a tracked migration and production deployment remain outstanding. Local Windows server status was not checked during this closeout.
+The Cloud setup session reported that it installed dependencies, started PostgreSQL, the API, and the frontend, and passed all five API tests, frontend lint/build, and live menu/category-filter checks. Those are results reported by that setup session, not a CI run or a guarantee that its processes are still running. The database was a development fixture; the tracked migration has not been applied there, and production deployment remains outstanding. Local Windows server status was not checked during this closeout.
 
 ## Documentation
 
@@ -107,7 +107,7 @@ cd /workspace/Laylah/frontend
 npm run dev -- --strictPort
 ```
 
-The backend needs a reachable PostgreSQL database and a private ignored `backend/.env` containing the variables listed in `backend/.env.example`. Never paste credentials into chat or commit them. In the current prepared environment, `/workspace/laylah-setup/START.md` describes existing fixture helpers; these are environment-local, not versioned migrations or guaranteed files in a fresh environment. Review that guide before using helpers and preserve its database volume. Database provisioning from the repository alone remains pending until a reviewed migration exists. Do not bind to public interfaces or publish application ports.
+The backend needs a reachable PostgreSQL database and a private ignored `backend/.env` containing the variables listed in `backend/.env.example`. Never paste credentials into chat or commit them. `backend/migrations/001_create_menu_items.sql` provisions the initial schema, menu data, and read-only app grants for a fresh database whose `laylah_app` role already exists. Do not run it against the populated `laylah_dev` database. In the current prepared environment, `/workspace/laylah-setup/START.md` describes existing fixture helpers; these are environment-local, not versioned migrations or guaranteed files in a fresh environment. Review that guide before using helpers and preserve its database volume. Do not bind to public interfaces or publish application ports.
 
 ### Inspecting with ChatGPT
 

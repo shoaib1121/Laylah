@@ -34,11 +34,11 @@ Browser
 - `GET /api/v1/menu` selects the public menu fields from PostgreSQL table `app.menu_items`. Optional `category` accepts `Indian`, `Arabian`, or `Drinks`; unsupported and repeated values return HTTP 400 with a JSON error. Category lookup uses a parameterized SQL value.
 - Automated API tests are in `backend/test/app.test.js`, using Node's built-in `node:test`, strict assertions, and Supertest.
 
-After the rebrand, the API-to-database path was verified locally: the health endpoint returned `ok`, and the menu endpoint returned five records. The local PostgreSQL database and role have been renamed to `laylah_dev` and `laylah_app`; ignored `backend/.env` uses those identifiers. The SQL setup has not yet been captured as a tracked migration.
+After the rebrand, the API-to-database path was verified locally: the health endpoint returned `ok`, and the menu endpoint returned five records. The local PostgreSQL database and role have been renamed to `laylah_dev` and `laylah_app`; ignored `backend/.env` uses those identifiers. `backend/migrations/001_create_menu_items.sql` creates the initial schema, table, constraints, seed rows, and read-only grants for a fresh database. It must not be run against the populated local database.
 
 ### Shared development environment
 
-A reusable Codex Cloud environment has been published for the project. The Cloud checkout was confirmed at `/workspace/Laylah`, remote `https://github.com/shoaib1121/Laylah.git`, branch `work`, commit `4eeee4e`. The setup session reported passing API tests, frontend lint/build, and live menu/category-filter checks. This environment supports development; it does not host a production Laylah deployment. The checked-out base used a development database fixture, and the tracked migration remains future work.
+A reusable Codex Cloud environment has been published for the project. The Cloud checkout was confirmed at `/workspace/Laylah`, remote `https://github.com/shoaib1121/Laylah.git`, branch `work`, commit `4eeee4e`. The setup session reported passing API tests, frontend lint/build, and live menu/category-filter checks. This environment supports development; it does not host a production Laylah deployment. The checked-out base used a development database fixture; the fresh-database migration has not been applied to that fixture.
 
 ### Verified repository layout
 
@@ -67,7 +67,7 @@ Other files include lockfiles, lint configuration, HTML entry point, styles, and
 ## Remaining full-stack work — partly implemented
 
 - **Database:** PostgreSQL 18.6 is configured locally on port 5433; the owner created and populated `laylah_dev` and verified read access as `laylah_app`.
-- **Persistence:** the `pg` driver and parameterized menu query are implemented and were verified against the local PostgreSQL data. The database and role rename is complete; a versioned migration remains outstanding. A migration tool has not been selected.
+- **Persistence:** the `pg` driver and parameterized menu query are implemented and were verified against the local PostgreSQL data. The database and role rename is complete. The initial versioned SQL migration is tracked; a migration runner has not been selected.
 - **API:** continue versioned REST/JSON under `/api/v1`; document the contract (for example with OpenAPI) after the product contract is settled.
 - **Authentication:** the owner agreed to cookie-based authentication for the web application and its APIs as the starting direction. No authentication or session implementation exists. Prefer server-managed sessions for the first browser-focused product, then decide session storage and account lifecycle before coding.
 - **Authorization:** server-enforced least privilege for protected operations; add roles and object ownership checks only when features require them. No authorization currently exists.
