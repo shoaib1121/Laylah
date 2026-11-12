@@ -95,3 +95,29 @@ At closeout on 2026-11-11:
 5. Choose production hosting and operations only after scope and cost review.
 
 Do not proceed to authentication until the first feature that needs protected access is defined; the agreed cookie-based direction is recorded in `SECURITY.md` and `ARCHITECTURE.md`.
+
+## GitHub-first workflow setup (2026-11-12)
+
+### Completed and verified locally
+
+- Started with a clean cloud checkout; verified GitHub default branch main at `7c7e7cac1f783bbd7aab24787fe5cce29d212f60` and fetched it before creating `chore/github-first-workflow`.
+- Added AGENTS.md, a PR template, and CI for frontend lint/build/existing tests, backend tests, and independent dependency audits on PRs to main and main pushes. No deployment or application/UI behavior changed.
+- Added three meaningful API regression tests: generic database errors, parameterized category queries, and rejection before database access. All eight backend tests passed in Linux with Supertest loopback access.
+- Both `npm ci` installs passed; frontend lint and Vite production build passed. No frontend test script exists; `npm run test --if-present` succeeds without running tests.
+- Backend lockfile audit: zero vulnerabilities. Frontend audit: four moderate findings from minimatch (GHSA-g3hv-75wg-m249) and its ESLint dependency chain. Both passed the configured high/critical severity gate. No packages or lockfiles were changed.
+- Cloud environment status reported connected; origin matches the requested repository. Development checks do not require the owner's Windows laptop. Existing fixture startup instructions were inspected, but no live database/API verification was performed in this task.
+- Updated README, project context, and security handoff; ARCHITECTURE.md records the new delivery validation jobs while preserving application architecture. Earlier cloud commits and five-test results above are historical checkpoints, not the current workflow verification.
+
+### Pending and known limitations
+
+- Main is currently unprotected with no rulesets. The connector provides no protection mutation tool; shell `gh api` returned `Forbidden`. Follow exact README settings after CI check names become available. Administrative recovery remains available to the solo owner.
+- actionlint 1.7.7 validated the Actions workflow syntax and expressions successfully; `git diff --check` passed.
+- GitHub-hosted Actions results must be checked on the PR; local passes alone do not establish remote CI success. This setup remains on the feature branch until explicit approval and merge.
+- Moderate frontend advisory remediation needs review; do not apply the suggested breaking ESLint major change automatically. SAST, DAST, and automated secret scanning remain pending.
+- Versioned PostgreSQL migration and database integration tests remain the next application milestone. No authentication, authorization, ordering, or production deployment exists. Cloud fixture helpers are outside Git; fresh environment restoration was not tested here.
+
+### Remote verification
+
+- Opened PR #1: https://github.com/shoaib1121/Laylah/pull/1 targeting main; left unmerged.
+- GitHub Actions run https://github.com/shoaib1121/Laylah/actions/runs/43162258123 verified all four jobs successful for implementation commit `f0fde3bfd342293aa1cf6825da863ea61941b5ce`: Frontend checks, Backend tests, Dependency audit (frontend), Dependency audit (backend).
+- Staged path/diff review and secret-pattern checks passed; no environment files or credentials committed. Main protection remains a manual owner action as described above.

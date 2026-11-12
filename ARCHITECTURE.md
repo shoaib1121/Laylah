@@ -72,7 +72,7 @@ Other files include lockfiles, lint configuration, HTML entry point, styles, and
 - **Authentication:** the owner agreed to cookie-based authentication for the web application and its APIs as the starting direction. No authentication or session implementation exists. Prefer server-managed sessions for the first browser-focused product, then decide session storage and account lifecycle before coding.
 - **Authorization:** server-enforced least privilege for protected operations; add roles and object ownership checks only when features require them. No authorization currently exists.
 - **Testing:** backend API tests use a database test double. A November 10 local run hit loopback permission errors before it could verify API responses. The November 12 Cloud setup session reported all five API tests and frontend lint/build passed, plus live menu/category-filter checks. Automated PostgreSQL integration coverage remains pending. Frontend component and browser end-to-end tests are future candidates.
-- **Delivery and deployment:** the published Codex Cloud environment is for development only. CI, SAST/SCA/secrets checks, containers, production hosting, HTTPS, production secrets, and operational monitoring are future work. The hosting provider is undecided.
+- **Delivery and deployment:** the published Codex Cloud environment is for development only. GitHub Actions now validates PRs targeting main and main pushes with separate frontend, backend, and dependency-audit jobs; see README.md for the development workflow. SAST, automated secret scanning, production containers/hosting, HTTPS, production secrets, and operational monitoring remain future work. The hosting provider is undecided.
 
 ## Open product and design decisions
 
@@ -81,6 +81,6 @@ Other files include lockfiles, lint configuration, HTML entry point, styles, and
 - Schema, money representation, migrations, and application database role details.
 - Session store, account recovery, identity provider, and CSRF mechanism for future cookie-authenticated state changes.
 - API policy for unknown query parameters, production topology, and rate limiting.
-- CI provider, hosting choice, cloud cost, and operational scope.
+- AppSec tooling beyond npm dependency audits, hosting choice, cloud cost, and operational scope.
 
 Update this document when architecture changes; use `DEVELOPMENT_LOG.md` for chronological progress and `SECURITY.md` for security controls and lifecycle work.

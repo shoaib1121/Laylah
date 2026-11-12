@@ -114,3 +114,59 @@ test('menu endpoint rejects repeated category parameters', async () => {
   })
 })
 
+
+test('database failures return a generic error without internal details', async () => {
+  const failingApp = createApp({
+    async query() {
+      throw Object.assign(new Error('private database connection details'), {
+        code: 'TEST_DATABASE_FAILURE',
+      })
+    },
+  })
+  const response = await request(failingApp).get('/api/v1/menu')
+
+  assert.equal(response.status, 500)
+  assert.deepEqual(response.body, {
+    error: {
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Unable to load the menu right now.',
+    },
+  })
+  assert.equal(response.headers['x-powered-by'], undefined)
+})
+
+test('category queries pass the category as a SQL parameter', async () => {
+  let observedQuery
+  const isolatedApp = createApp({
+    async query(text, values) {
+      observedQuery = { text, values }
+      return { rows: [] }
+    },
+  })
+  const response = await request(isolatedApp)
+    .get('/api/v1/menu')
+    .query({ category: 'Drinks' })
+
+  assert.equal(response.status, 200)
+  assert.deepEqual(response.body, { items: [] })
+  assert.match(observedQuery.text, /WHERE category = \$1/)
+  assert.deepEqual(observedQuery.values, ['Drinks'])
+  assert.ok(!observedQuery.text.includes('Drinks'))
+})
+
+test('SQL-like category input is rejected before database access', async () => {
+  let queryCount = 0
+  const isolatedApp = createApp({
+    async query() {
+      queryCount += 1
+      return { rows: [] }
+    },
+  })
+  const response = await request(isolatedApp)
+    .get('/api/v1/menu')
+    .query({ category: "Indian' OR '1'='1" })
+
+  assert.equal(response.status, 400)
+  assert.equal(response.body.error.code, 'INVALID_CATEGORY')
+  assert.equal(queryCount, 0)
+})

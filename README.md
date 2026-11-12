@@ -8,7 +8,7 @@ Laylah is a restaurant web application for an Indian and Arabian food concept, a
 - A local Express REST API with health and public menu endpoints. The menu endpoint reads from PostgreSQL, where five sample dishes have been seeded. After the Laylah database and role rename, the health and menu endpoints were verified; the menu returned five dishes.
 - Backend API tests using Node's built-in test runner and Supertest.
 
-The tracked database migration is still outstanding. Authentication, authorization, ordering, CI/CD, security scanning, and deployment are planned.
+The tracked database migration is still outstanding. Authentication, authorization, ordering, and deployment remain planned. GitHub Actions validation and dependency auditing are configured; current results and limitations are in DEVELOPMENT_LOG.md.
 
 ## Current status — 2026-11-12
 
@@ -72,3 +72,43 @@ Current endpoints:
 - `GET /api/v1/menu?category=Indian` (also `Arabian` or `Drinks`)
 
 See `ARCHITECTURE.md` for verified implementation details and `SECURITY.md` for current controls and limitations.
+
+## GitHub-first development
+
+Follow [AGENTS.md](AGENTS.md). Inspect the working tree, fetch GitHub's default branch (`main`), and create one descriptive feature branch from its latest commit. Preserve existing work, commit reviewed task files with meaningful messages, push normally, and open a PR using the template. Never force-push or merge without the owner's explicit approval.
+
+CI runs on PRs targeting main and pushes to main, using Node 24 and separate frontend/backend jobs. Frontend runs `npm ci`, `npm run lint`, `npm run build`, and `npm run test --if-present` (no frontend test script currently exists). Backend runs `npm ci` and `npm test`; its eight API tests use a database double, so CI needs no database password or live PostgreSQL. Independent dependency jobs run `npm audit --package-lock-only --audit-level=high` for both lockfiles, including development dependencies. High/critical findings and audit service failures fail the job; moderate findings remain visible for triage. Read failing step logs in the PR Checks tab. No deployment is configured.
+
+### Main protection: manual setup
+
+Protection could not be written through this session's available tools: the GitHub connector exposes no protection mutation, and the shell API route returned `Forbidden`. At inspection, main was unprotected and no rulesets existed.
+
+After CI has run, open repository **Settings → Branches → Add classic branch protection rule** (or **Add rule**):
+
+1. Set branch name pattern to `main`.
+2. Enable **Require a pull request before merging**. For this solo-owner repository, leave required approving reviews off so the owner can maintain it; explicit owner permission to merge remains the agent rule.
+3. Enable **Require status checks to pass before merging** and select `Frontend checks`, `Backend tests`, `Dependency audit (frontend)`, and `Dependency audit (backend)` from this PR's CI run. Require branches up to date if desired.
+4. Leave **Allow force pushes** and **Allow deletions** unchecked. Leave lock-branch, signed-commit, linear-history, and administrator-bypass restrictions off unless you deliberately want them.
+5. Save and verify the protection settings. Administrative bypass remains an owner recovery option; agents must still follow the PR and approval rules.
+
+### Cloud development without Windows
+
+The existing workspace is `/workspace/Laylah`, with origin `https://github.com/shoaib1121/Laylah.git`. Node 24/npm run both installs and all checks in Linux without the Windows laptop. Do not recreate the environment. Install dependencies using `npm ci` in each component.
+
+In separate cloud terminals:
+
+```sh
+cd /workspace/Laylah/backend
+npm start
+```
+
+```sh
+cd /workspace/Laylah/frontend
+npm run dev -- --strictPort
+```
+
+The backend needs a reachable PostgreSQL database and a private ignored `backend/.env` containing the variables listed in `backend/.env.example`. Never paste credentials into chat or commit them. In the current prepared environment, `/workspace/laylah-setup/START.md` describes existing fixture helpers; these are environment-local, not versioned migrations or guaranteed files in a fresh environment. Review that guide before using helpers and preserve its database volume. Database provisioning from the repository alone remains pending until a reviewed migration exists. Do not bind to public interfaces or publish application ports.
+
+### Inspecting with ChatGPT
+
+Enable the GitHub integration with access to `shoaib1121/Laylah`. Ask ChatGPT to read the latest `main` (or the specific PR branch), PROJECT_CONTEXT.md, and its document map before answering. Remote commits are shared evidence; Codex workspace edits, local database state, running processes, and conversation history are not automatically shared. No duplicate status file or production deployment is needed.
